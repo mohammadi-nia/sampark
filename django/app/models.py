@@ -88,4 +88,5 @@ class ParkingSpaceNumberModel(models.Model):
         موجودیت مکان پارک
     """
     number = models.IntegerField(validators = [MinValueValidator(limit_value = 1)]) # شماره مکان پارک
-    row = models.ForeignKey('ParkingSpaceRowModel', on_delete = models.CASCADE, related_name = 'numbers')
+    row = models.ForeignKey('ParkingSpaceRowModel', on_delete = models.CASCADE, related_name = 'numbers') # ردیف پارک
+    is_full = models.BooleanField(default = False) # ایا مکان پارک پر است
