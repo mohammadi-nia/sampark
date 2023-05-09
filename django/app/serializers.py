@@ -76,3 +76,10 @@ class SearchSerializer(serializers.Serializer):
         سریالایز کردن داده های جستجو
     """
     q = serializers.CharField(max_length = 25) # داده جستجو شده
+    
+
+class DeleteTicketSerializer(serializers.Serializer):
+    """
+        سریالایز کردن داده های پاک کردن بلیت
+    """
+    id = serializers.IntegerField() # ایدی داده جستجو شده
