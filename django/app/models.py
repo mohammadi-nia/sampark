@@ -44,7 +44,7 @@ class UserProfileModel(AbstractBaseUser , PermissionsMixin):
             code='invalid_phone_number'
         ),
     ]) # شماره تماس کاربر
-
+    parking = models.ForeignKey('ParkingModel', on_delete = models.CASCADE, null = True, default = None) # پارکینگ کابر مربوطه
 
     is_staff = models.BooleanField(default=False) # کابر میتواند پنل ادمین را ببیند
     is_active = models.BooleanField(default=True) # ایا کاربر فعال است
