@@ -83,3 +83,9 @@ class ParkingSpaceRowModel(models.Model):
     floor = models.ForeignKey('ParkingSpaceFloorModel', on_delete = models.CASCADE) # طبقه مربوطه
     
     
+class ParkingSpaceNumberModel(models.Model):
+    """
+        موجودیت مکان پارک
+    """
+    number = models.IntegerField(validators = [MinValueValidator(limit_value = 1)]) # شماره مکان پارک
+    row = models.ForeignKey('ParkingSpaceRowModel', on_delete = models.CASCADE, related_name = 'numbers')
