@@ -7,11 +7,11 @@ from django.contrib.auth.models import BaseUserManager, PermissionsMixin, Abstra
 # classes
 class UserProfileManager(BaseUserManager):
     """
-    کلاس منیجر کاربر
+        کلاس منیجر کاربر
     """
     def create_user(self ,first_name, last_name, mobile_number, password = None):
         """
-        برای ذخیره کاربر عادی
+            برای ذخیره کاربر عادی
         """
         user = self.model(first_name = first_name, last_name = last_name, mobile_number = mobile_number)
         user.set_password(password)
@@ -21,7 +21,7 @@ class UserProfileManager(BaseUserManager):
 
     def create_superuser(self, first_name, last_name, mobile_number, password):
         """
-        برای ذخیره کاربر ادمین
+            برای ذخیره کاربر ادمین
         """
         user = self.create_user(first_name, last_name, mobile_number, password)
         user.is_superuser = True
@@ -33,7 +33,7 @@ class UserProfileManager(BaseUserManager):
 
 class UserProfileModel(AbstractBaseUser , PermissionsMixin):
     """
-    مدل کاربر
+        مدل کاربر
     """
     first_name = models.CharField(max_length = 25 , null = True, default = None) # نام کاربر
     last_name = models.CharField(max_length = 25 , null = True, default = None) # نام خانوادگی کاربر
@@ -57,3 +57,11 @@ class UserProfileModel(AbstractBaseUser , PermissionsMixin):
     def __str__(self):
 
         return str(self.id) + ' - ' + str(self.mobile_number)
+    
+    
+class ParkingModel(models.Model):
+    """
+        موجودیت پارکینگ
+    """
+    name = models.CharField(max_length = 25)
+    capacity = models.IntegerField(validators = [MinValueValidator(limit_value = 1)])
