@@ -32,9 +32,7 @@ INSTALLED_APPS = [
     # app
     'app.apps.AppConfig',
     # third party app
-    'drf_yasg',
     'corsheaders',
-    'rest_framework_tracking'
 ]
 
 MIDDLEWARE = [
