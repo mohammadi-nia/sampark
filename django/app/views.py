@@ -1,4 +1,5 @@
 from app import models, serializers
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -110,7 +111,21 @@ def search(request):
         return Response(data={'detail':'مشکلی پیش امده است'}, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     
-# @api_view(http_method_names = 'delete')
-# # @permission_classes(permission_classes=[IsAuthenticated])
-# def delete_ticket(request, pk):
+@api_view(http_method_names = 'delete')
+# @permission_classes(permission_classes=[IsAuthenticated])
+def delete_ticket(request, pk):
+    """
+        ای پی ای پاک کردن بلیت
+    """
+    ticket = get_object_or_404(models.TicketModel, id = pk) # بلیت یافت شده
     
+    try:
+        parking_number = ticket.parking_number # شماره پارکینگ
+        parking_number.is_full = False # تغییر حالت شماره پارکینگ
+        # ذخیره شماره پارکینگ
+        parking_number.save()
+        # حذف بلیت
+        ticket.delete()
+        return Response(status = status.HTTP_200_OK)
+    except:
+        return Response(data={'detail':'مشکلی پیش امده است'}, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
