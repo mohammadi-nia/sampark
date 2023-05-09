@@ -105,5 +105,5 @@ class TicketModel(models.Model):
             code='invalid_phone_number'
         ),
     ]) # شماره همراه راننده
-    plate = models.CharField(max_length = 6, default = 0)
+    plate = models.CharField(max_length = 6, default = 0) # شماره پلاک
     parking_number = models.ForeignKey('ParkingSpaceNumberModel', on_delete = models.CASCADE, related_name = 'tickets') # شماره پارکینگ
