@@ -69,3 +69,10 @@ class CreateTicketSerializer(serializers.Serializer):
     parking_number = serializers.IntegerField() # شماره پارکینگ
     parking_row = serializers.IntegerField() # شماره ردیف
     parking_floor = serializers.CharField(max_length = 1) # نام طبقه
+    
+    
+class SearchSerializer(serializers.Serializer):
+    """
+        سریالایز کردن داده های جستجو
+    """
+    q = serializers.CharField(max_length = 25) # داده جستجو شده
