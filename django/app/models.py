@@ -65,3 +65,11 @@ class ParkingModel(models.Model):
     """
     name = models.CharField(max_length = 25)
     capacity = models.IntegerField(validators = [MinValueValidator(limit_value = 1)])
+    
+
+class ParkingSpaceFloorModel(models.Model):
+    """
+        موجودیت طبقه پارکینگ
+    """
+    name = models.CharField(max_length = 1) # نام طبقه
+    parking = models.ForeignKey('ParkingModel', on_delete = models.CASCADE) # پارکینگ مورد نظر
