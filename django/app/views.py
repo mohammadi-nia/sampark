@@ -14,7 +14,7 @@ def get_parking_full_spaces_number(request):
         ای پی ای دریافت تعداد مکان های پر در پارکینگ
     """
     try:
-        full_parking_spaces = models.ParkingSpaceNumberModel.objects.filter(is_full = False) # پارکینگ هایی که خالی هستند
+        full_parking_spaces = models.ParkingSpaceNumberModel.objects.filter(is_full = True) # پارکینگ هایی که خالی هستند
         return Response(data = {'count':len(full_parking_spaces)}, status = status.HTTP_200_OK)
     except:
         return Response(data={'detail':'مشکلی پیش امده است'}, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -28,21 +28,21 @@ def create_ticket(request):
     """
     ticket_data = serializers.CreateTicketSerializer(data = request.data) # داده های دریافتی از کلاینت
     ticket_data.is_valid(raise_exception = True)
-    ticket_valid_data = ticket_data.validated_data # داده های ارزیابی شده
+    ticket_valid_data = dict(ticket_data.validated_data) # داده های ارزیابی شده
     
     try:
         parking_spaces = models.ParkingSpaceNumberModel.objects.filter(
                 is_full = False,
                 number = ticket_valid_data['parking_number'],
                 row__number = ticket_valid_data['parking_row'],
-                row__floor__name = ticket_valid_data['parking_floor'],
+                row__floor__name__iexact  = ticket_valid_data['parking_floor'],
             ) # مکان پارک های خالی
         # اگر مکان پارک خالی وجود ندارد
         if not parking_spaces:
             return Response(data={'detail':'مکان پارکی با این مشخصات یافت نشد یا این مکان پارک پر است'}, status = status.HTTP_400_BAD_REQUEST)
         
         # تغییر حالت مکان پارک
-        parking_space = serializers.ParkingSpaceNumberSerializer(instance = parking_spaces.first()) # مکان پارک
+        parking_space = parking_spaces.first() # مکان پارک
         parking_space.is_full = True # پر بودن مکان پارک
         # ذخیره مکان پارک
         parking_space.save()
