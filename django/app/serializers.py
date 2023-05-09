@@ -2,19 +2,57 @@ from app import models
 from rest_framework import serializers
 
 
+
 # classes
 class UserProfileSerializer(serializers.ModelSerializer):
     """
         سریالایز کردن داده های موجودیت کاربر
     """
     class Meta:
-        """
-            کلاسی برای دادن اطلاعات به جنگو رست
-        """
-        model = models.UserProfileModel  # مدل استفاده شده برای سریالایزر کردن داده ها (کاربر)
-        fields = ['id','first_name', 'last_name', 'mobile_number', 'password']  # فیلدهایی که داده انها سریالایز میشود 
-        extra_kwargs = { 
-            'password':{'write_only': True},
-            'first_name':{'required':False},
-            'last_name':{'required':False}
-            }
+        model = models.UserProfileModel
+        fields = '__all__'
+        
+        
+class ParkingSerializer(serializers.ModelSerializer):
+    """
+        سریالایز کردن داده های پارکینگ
+    """
+    class Meta:
+        model = models.ParkingModel
+        fields = '__all__'
+        
+        
+class ParkingSpaceFloorSerializer(serializers.ModelSerializer):
+    """
+        سریالایز کردن داده های طبقه پارکینگ
+    """
+    class Meta:
+        model = models.ParkingSpaceFloorModel
+        fields = '__all__'
+        
+        
+class ParkingSpaceRowSerializer(serializers.ModelSerializer):
+    """
+        سریالایز کردن داده های ردیف طبقه پارکینگ
+    """
+    class Meta:
+        model = models.ParkingSpaceRowModel
+        fields = '__all__'
+        
+        
+class ParkingSpaceNumberSerializer(serializers.ModelSerializer):
+    """
+        سریالایز کردن داده های شماره جای پارک پارکینگ
+    """
+    class Meta:
+        model = models.ParkingSpaceNumberModel
+        fields = '__all__'
+        
+        
+class TicketSerializer(serializers.ModelSerializer):
+    """
+        سریالایز کردن داده های بلیت
+    """
+    class Meta:
+        model = models.TicketModel
+        fields = '__all__'
