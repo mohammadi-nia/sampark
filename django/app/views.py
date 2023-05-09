@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 # functions
-@api_view(http_method_names = 'get')
+@api_view(http_method_names = ['get'])
 # @permission_classes(permission_classes=[IsAuthenticated])
 def get_parking_full_spaces_number(request):
     """
@@ -20,7 +20,7 @@ def get_parking_full_spaces_number(request):
         return Response(data={'detail':'مشکلی پیش امده است'}, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     
-@api_view(http_method_names = 'post')
+@api_view(http_method_names = ['post'])
 # @permission_classes(permission_classes=[IsAuthenticated])
 def create_ticket(request):
     """
@@ -67,7 +67,7 @@ def create_ticket(request):
         return Response(data={'detail':'مشکلی پیش امده است'}, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     
-@api_view(http_method_names = 'post')
+@api_view(http_method_names = ['post'])
 # @permission_classes(permission_classes=[IsAuthenticated])
 def search(request):
     """
@@ -111,7 +111,7 @@ def search(request):
         return Response(data={'detail':'مشکلی پیش امده است'}, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     
-@api_view(http_method_names = 'delete')
+@api_view(http_method_names = ['delete'])
 # @permission_classes(permission_classes=[IsAuthenticated])
 def delete_ticket(request, pk):
     """
