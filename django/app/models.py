@@ -72,7 +72,7 @@ class ParkingSpaceFloorModel(models.Model):
         موجودیت طبقه پارکینگ
     """
     name = models.CharField(max_length = 1) # نام طبقه
-    parking = models.ForeignKey('ParkingModel', on_delete = models.CASCADE) # پارکینگ مورد نظر
+    parking = models.ForeignKey('ParkingModel', on_delete = models.CASCADE, related_name = 'floors') # پارکینگ مورد نظر
     
     
 class ParkingSpaceRowModel(models.Model):
@@ -80,7 +80,7 @@ class ParkingSpaceRowModel(models.Model):
         موجودیت ردیف پارکینگ
     """
     number = models.IntegerField(validators = [MinValueValidator(limit_value = 1)]) # شماره ردیف
-    floor = models.ForeignKey('ParkingSpaceFloorModel', on_delete = models.CASCADE) # طبقه مربوطه
+    floor = models.ForeignKey('ParkingSpaceFloorModel', on_delete = models.CASCADE, related_name = 'rows') # طبقه مربوطه
     
     
 class ParkingSpaceNumberModel(models.Model):
