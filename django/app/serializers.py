@@ -56,3 +56,16 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.TicketModel
         fields = '__all__'
+        
+        
+class CreateTicketSerializer(serializers.Serializer):
+    """
+        سریالایز کردن داده های ساخت بلیت
+    """
+    driver_name = serializers.CharField(max_length = 25) # نام راننده
+    driver_national_code = serializers.CharField(max_length = 10) # شماره ملی راننده
+    driver_phone_number = serializers.CharField(max_length = 11) # شماره همراه راننده
+    plate = serializers.CharField(max_length = 6) # پلاک ماشین
+    parking_number = serializers.IntegerField() # شماره پارکینگ
+    parking_row = serializers.IntegerField() # شماره ردیف
+    parking_floor = serializers.CharField(max_length = 1) # نام طبقه
