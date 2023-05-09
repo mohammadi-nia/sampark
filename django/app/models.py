@@ -63,8 +63,8 @@ class ParkingModel(models.Model):
     """
         موجودیت پارکینگ
     """
-    name = models.CharField(max_length = 25)
-    capacity = models.IntegerField(validators = [MinValueValidator(limit_value = 1)])
+    name = models.CharField(max_length = 25) # نام پارکینگ
+    capacity = models.IntegerField(validators = [MinValueValidator(limit_value = 1)]) # ظرفیت پاکینگ
     
 
 class ParkingSpaceFloorModel(models.Model):
