@@ -90,3 +90,19 @@ class ParkingSpaceNumberModel(models.Model):
     number = models.IntegerField(validators = [MinValueValidator(limit_value = 1)]) # شماره مکان پارک
     row = models.ForeignKey('ParkingSpaceRowModel', on_delete = models.CASCADE, related_name = 'numbers') # ردیف پارک
     is_full = models.BooleanField(default = False) # ایا مکان پارک پر است
+    
+    
+class TicketModel(models.Model):
+    """
+        موجودیت بلیت
+    """
+    driver_name = models.CharField(max_length = 25) # نام راننده
+    driver_national_code = models.CharField(max_length = 10) # شماره ملی راننده
+    driver_phone_number = models.CharField(max_length = 11, validators = [
+        RegexValidator(
+            regex='^[0][9][0-9]*$',
+            message='قالب شماره موبایل رعایت نشده است',
+            code='invalid_phone_number'
+        ),
+    ]) # شماره همراه راننده
+    parking_number = models.ForeignKey('ParkingSpaceNumberModel', on_delete = models.CASCADE, related_name = 'tickets') # شماره پارکینگ
